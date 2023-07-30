@@ -1,11 +1,13 @@
 syntax = "proto3";
 
-message NewUser = {
+option go_package = "package.fake/fake";
+
+message NewUser {
     string username = 1;
     string password = 2;
 }
-
-message User  = {
+  
+message User  {
     string id = 1;
     string username = 2;
 }
