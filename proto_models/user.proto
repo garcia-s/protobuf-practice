@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "package.fake/fake";
+option go_package = "proto.user";
 
 message NewUser {
     string username = 1;
