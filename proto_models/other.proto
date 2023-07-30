@@ -1,0 +1,7 @@
+syntax = 'proto3';
+
+message Any {
+    string any =1; 
+    string two = 2
+    string two = 2;
+}
