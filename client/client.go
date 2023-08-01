@@ -1,19 +1,29 @@
 package main
 
 import (
+    "bytes"
 	"fmt"
+	"github.com/garcia-s/protobuf-practice/client/proto/users"
+	"google.golang.org/protobuf/proto"
 	"net/http"
-    "github.com/garcia-s/protobuf-practice/client/fake"
 )
 
 func main() {
 	url := "http://localhost:8080/client"
-    user := pb.NewUser(
+	user := users.NewUser{
+		Username: "juanito",
+		Password: "thisisapassword",
+	}
+	v, e := proto.Marshal(user)
+	if e != nil {
+		panic(e)
+	}
 
-    )
-    r, err := http.NewRequest("POST", url)
-    if(err != nil) {
-        panic(err)
-    }
-    fmt.Println("Body:" ,  r.Body);
+	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(v))
+
+    req.Header.Set("Content-Type","application/octet-stream");
+    client := &http.Client{}
+    client.Do(req);
+
+	fmt.Println("Body:", req.Body)
 }
